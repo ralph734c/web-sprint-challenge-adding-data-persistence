@@ -11,7 +11,7 @@ async function findTasks() {
     return {
       ...taskWithoutProjectId,
       task_completed: Boolean(task.task_completed),
-    }
+    };
   });
 }
 

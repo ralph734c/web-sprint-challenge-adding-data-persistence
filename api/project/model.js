@@ -1,12 +1,23 @@
 const db = require('../../data/dbConfig');
 // build your `Project` model here
 
-function findProjects() {
-  return db('projects');
+async function findProjects() {
+  const projects = await db('projects');
+  return projects.map((project) => ({
+    ...project,
+    project_completed: Boolean(project.project_completed),
+  }));
 }
 
-function findProjectById(project_id) {
-  return db('projects').where('project_id', project_id).first();
+async function findProjectById(project_id) {
+  const specificProject = await db('projects')
+    .where('project_id', project_id)
+    .first();
+
+  return {
+    ...specificProject,
+    project_completed: Boolean(specificProject.project_completed),
+  };
 }
 
 async function addProject(project) {
