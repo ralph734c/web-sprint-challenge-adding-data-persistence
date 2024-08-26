@@ -4,9 +4,9 @@ const router = require('express').Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    res.json({
-      message: `The ${req.method} to ${req.originalUrl} is working!`,
-    });
+    console.log(`The ${req.method} to ${req.originalUrl} is working!`);
+    const tasks = await tasksModel.findTasks();
+    res.json(tasks);
   } catch (error) {
     next(error);
   }
@@ -14,9 +14,9 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    res.json({
-      message: `The ${req.method} to ${req.originalUrl} is working!`,
-    });
+    console.log(`The ${req.method} to ${req.originalUrl} is working!`);
+    const newTask = await tasksModel.addTask(req.body);
+    res.status(201).json(newTask);
   } catch (error) {
     next(error);
   }
