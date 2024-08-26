@@ -4,9 +4,9 @@ const router = require('express').Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    res.json({
-      message: `The ${req.method} to ${req.originalUrl} is working!`,
-    });
+    console.log(`The ${req.method} to ${req.originalUrl} is working!`);
+    const allResources = await resourcesModel.findResources();
+    res.json(allResources);
   } catch (error) {
     next(error);
   }
@@ -14,9 +14,9 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    res.json({
-      message: `The ${req.method} to ${req.originalUrl} is working!`,
-    });
+    console.log(`The ${req.method} to ${req.originalUrl} is working!`);
+    const newResource = await resourcesModel.addResource(req.body);
+    res.status(201).json(newResource);
   } catch (error) {
     next(error);
   }

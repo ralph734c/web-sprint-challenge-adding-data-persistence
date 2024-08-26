@@ -4,7 +4,6 @@ const router = require('express').Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log(`The ${req.method} to ${req.originalUrl} is working!`);
     const allProjects = await projectsModel.findProjects();
     res.json(allProjects);
   } catch (error) {
@@ -14,7 +13,6 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log(`The ${req.method} to ${req.originalUrl} is working!`);
     const newProject = await projectsModel.addProject(req.body);
     res.status(201).json(newProject);
   } catch (error) {
