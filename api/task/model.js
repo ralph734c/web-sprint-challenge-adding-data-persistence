@@ -2,7 +2,11 @@ const db = require('../../data/dbConfig');
 // build your `Task` model here
 
 function findTasks() {
-  return db('tasks');
+  return db('tasks as tk').leftJoin(
+    'projects as pj',
+    'tk.project_id',
+    'pj.project_id'
+  ).select('tk.*', 'pj.project_name', 'pj.project_description')
 }
 
 function findTaskById(task_id) {
